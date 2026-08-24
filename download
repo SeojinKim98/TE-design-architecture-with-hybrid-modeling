@@ -9,3 +9,4 @@ env/
 *.pkl
 *.npy
 *.csv
+!results/*.csv
