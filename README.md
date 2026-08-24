@@ -1,65 +1,33 @@
-# In silico design of synthetic bacterial terminators with targeted strength
+# Results
 
-Reference implementation for a three-phase framework in which model interpretation
-constrains sequence generation: a hybrid strength predictor is trained, frozen, and
-interrogated; the resulting determinants are exported as explicit design rules; and
-those rules then set the operators and objective of an evolutionary search that
-produces novel terminator sequences at prescribed termination efficiencies.
+Artifacts released with the paper.
 
-Seojin Kim and Doheon Lee, Department of Bio and Brain Engineering, KAIST.
+## `phase3_designed_sequences_330.csv`
 
-## What is here
+The 330 designed terminators: 30 per requested termination efficiency, across eleven
+targets from TE = 0.00 to 0.99. One row per candidate, 94 columns, covering the full
+provenance of each sequence:
 
-| Phase | Script | Contents |
-|-------|--------|----------|
-| 1 | `src/phase1_hybrid_predictor.py` | 29 sequence descriptors, Nucleotide Transformer embedding, leakage-safe stacking ensemble, repeated stratified cross-validation |
-| 2 | `src/phase2_interpretation.py` | held-out permutation importance per descriptor and per group, Spearman associations with Benjamini-Hochberg correction, exhaustive in silico mutagenesis and hairpin alignment, design-rule extraction |
-| 3a | `src/phase3a_evo_seed_generation.py` | Evo seed generation, prompted from a training terminator so that sampling begins inside terminator-like sequence space |
-| 3b | `src/phase3b_constrained_design.py` | five-objective Pareto ranking, rule-derived mutation operators, support and novelty filtering |
-| — | `src/external_check_tersp.py` | region annotation into the TerSP schema and scoring of the frozen design set |
+| group | columns | what they record |
+|-------|---------|------------------|
+| target | `target_id`, `target_te`, `target_model_y` | requested efficiency and its model-space equivalent |
+| sequence | `sequence`, `sequence_length` | the designed sequence |
+| Phase-1 prediction | `pred_model_y`, `pred_model_y_sd`, `pred_te`, `target_error_te` | ensemble prediction, spread across the 50 fold models, and deviation from target |
+| support and novelty | `nt_global_supported`, `bio_global_supported`, `structure_supported`, `nearest_training_nt_distance`, `is_exact_training_sequence` | whether the candidate lies inside the region of feature space populated by the training library, and how far it sits from the nearest training sequence |
+| Evo provenance | `prompt`, `anchor_rank`, `evo_*`, `qc_*` | the anchor prompt, sampling settings and the quality-control gate each sample passed |
+| search provenance | `pareto_rank`, `crowding_distance`, `mutation_operator`, `used_crossover`, `parent_1_sequence`, `parent_2_sequence`, `run_seed` | how the candidate was produced and ranked |
+| external check | `tersp_annotation_status`, `tersp_te`, `tersp_abs_error_te`, `tersp_*` | TerSP region annotation and score, or the reason the candidate was unscorable |
 
-Each phase depends only on frozen artifacts from the phase before it. The predictor is
-frozen before interpretation and the rules are fixed before generation, so no
-information from the design stage can influence either.
+`phase3_designed_sequences_330_summary.csv` is the same 330 rows reduced to the
+sequence, the target, the Phase-1 prediction and the TerSP score, for readers who do
+not need the full provenance.
 
-## Scope
+## `phase2_design_knowledge.json`
 
-These files document the analysis, not a packaged tool. Figure generation, artifact
-serialisation, checkpointing, progress reporting and the local directory layout have
-been removed so that the methodological content is not buried in bookkeeping. What
-remains is the feature construction, the models, the attribution and mutagenesis
-procedures, the objectives and operators of the search, and the filtering criteria.
+The exported design rules consumed by Phase 3. It records, for each admitted
+descriptor, the direction of its association with strength, its effect size, and its
+interquartile range among high-strength terminators, alongside the five group
+importances and the ISM hotspot positions.
 
-As a consequence the scripts are not runnable end to end as published. Restoring the
-input and output paths at the top of each file is enough to run them.
-
-## Environments
-
-Three separate environments were used; they are not mutually compatible.
-
-```bash
-pip install -r requirements.txt          # Phase 1-2, Python 3.9.12, CUDA 11.8
-pip install -r requirements-evo.txt      # Phase 3a, separate env, evo-model pins its own torch
-pip install -r requirements-tersp.txt    # external check, Python 3.13
-```
-
-Phases 1-2 and 3a were run on a single NVIDIA A100 80 GB GPU. Repeated
-cross-validation takes roughly 3.4 h and exhaustive mutagenesis roughly 9 h on that
-device. All random seeds are set in the scripts.
-
-## Data
-
-Training data are not redistributed here. They derive from the supplementary tables of
-
-> Chen Y-J, Liu P, Nielsen AAK, et al. Characterization of 582 natural and synthetic
-> terminators and quantification of their design constraints.
-> *Nature Methods* 2013;10:659-664. doi:10.1038/nmeth.2515
-
-The natural and synthetic tables were concatenated and three columns retained: `Name`,
-`Sequence` and `Average Strength`. The only modification applied was a base-10
-logarithm of the strength column. No records were excluded and no measurements were
-recomputed. Note that the resulting target is a log-strength, not a termination
-efficiency; the two are related by `strength = 1 / (1 - TE)`.
-
-The pretrained TerSP model used for the external check is downloaded by
-`external_check_tersp.py` from the URL published by its authors.
+These are model-derived associations and sensitivities, not experimentally established
+constraints.
