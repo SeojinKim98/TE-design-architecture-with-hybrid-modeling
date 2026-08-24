@@ -1,0 +1,212 @@
+{
+    "interpretation_type": "model-derived_and_observational",
+    "n_phase1_models": 50,
+    "n_ism_sequences": 582,
+    "soft_feature_preferences": {
+        "count_poly_t_4": {
+            "direction": "higher_associated",
+            "rho_actual": 0.5901104363805894,
+            "q_actual": 1.9834490429878434e-54,
+            "permutation_delta_rmse": 0.032412054384668404,
+            "high_strength_q25_q75": [
+                3.0,
+                4.0
+            ],
+            "high_strength_q10_q90": [
+                2.0,
+                6.0
+            ]
+        },
+        "stem_polyT_interaction": {
+            "direction": "higher_associated",
+            "rho_actual": 0.5738348828981591,
+            "q_actual": 4.138681327061296e-51,
+            "permutation_delta_rmse": 0.017709217008364274,
+            "high_strength_q25_q75": [
+                150.5,
+                192.5
+            ],
+            "high_strength_q10_q90": [
+                127.5,
+                240.0
+            ]
+        },
+        "seq_len": {
+            "direction": "higher_associated",
+            "rho_actual": 0.4722905311844426,
+            "q_actual": 6.596807665408701e-33,
+            "permutation_delta_rmse": 0.012984526745212787,
+            "high_strength_q25_q75": [
+                47.0,
+                55.0
+            ],
+            "high_strength_q10_q90": [
+                41.0,
+                57.0
+            ]
+        },
+        "upstream_a_richness": {
+            "direction": "higher_associated",
+            "rho_actual": 0.381236704061967,
+            "q_actual": 6.897283020934141e-21,
+            "permutation_delta_rmse": 0.007320433686333904,
+            "high_strength_q25_q75": [
+                0.3,
+                0.5
+            ],
+            "high_strength_q10_q90": [
+                0.1771428571428572,
+                0.7
+            ]
+        },
+        "kmer_AAA": {
+            "direction": "higher_associated",
+            "rho_actual": 0.26719378637341323,
+            "q_actual": 1.3757629784205312e-10,
+            "permutation_delta_rmse": 0.005426791804846903,
+            "high_strength_q25_q75": [
+                0.0222222222222222,
+                0.09375
+            ],
+            "high_strength_q10_q90": [
+                0.0,
+                0.14
+            ]
+        },
+        "max_poly_t_run": {
+            "direction": "higher_associated",
+            "rho_actual": 0.5518232645430318,
+            "q_actual": 1.0626301385301904e-46,
+            "permutation_delta_rmse": 0.0023044357567719195,
+            "high_strength_q25_q75": [
+                6.0,
+                7.0
+            ],
+            "high_strength_q10_q90": [
+                5.0,
+                8.0
+            ]
+        },
+        "kmer_TTT": {
+            "direction": "higher_associated",
+            "rho_actual": 0.5067307504503109,
+            "q_actual": 1.986905243570949e-38,
+            "permutation_delta_rmse": 0.001736486575420107,
+            "high_strength_q25_q75": [
+                0.0909090909090909,
+                0.14
+            ],
+            "high_strength_q10_q90": [
+                0.07030303030303027,
+                0.17699346405228755
+            ]
+        },
+        "stem_pairing_score": {
+            "direction": "higher_associated",
+            "rho_actual": 0.23304001754830392,
+            "q_actual": 2.655816978959236e-08,
+            "permutation_delta_rmse": 0.0014889769143286915,
+            "high_strength_q25_q75": [
+                25.5,
+                30.0
+            ],
+            "high_strength_q10_q90": [
+                22.0,
+                31.5
+            ]
+        },
+        "kmer_TTG": {
+            "direction": "lower_associated",
+            "rho_actual": -0.10242645940101043,
+            "q_actual": 0.018544149713340397,
+            "permutation_delta_rmse": 0.0010192756801603797,
+            "high_strength_q25_q75": [
+                0.0,
+                0.0222222222222222
+            ],
+            "high_strength_q10_q90": [
+                0.0,
+                0.0410212765957447
+            ]
+        },
+        "loop_proximal_gc_pair_fraction": {
+            "direction": "higher_associated",
+            "rho_actual": 0.17734150880370744,
+            "q_actual": 2.871007027073985e-05,
+            "permutation_delta_rmse": 0.0005128027885505062,
+            "high_strength_q25_q75": [
+                0.5,
+                1.0
+            ],
+            "high_strength_q10_q90": [
+                0.5,
+                1.0
+            ]
+        }
+    },
+    "feature_group_importance": {
+        "Sequence composition": {
+            "mean_delta_rmse": 0.07576323151803631,
+            "sd": 0.020336096879036872
+        },
+        "Interaction descriptors": {
+            "mean_delta_rmse": 0.024712766190879778,
+            "sd": 0.012317560113331039
+        },
+        "Context / Poly-T position": {
+            "mean_delta_rmse": 0.011635382930594263,
+            "sd": 0.00586502705620415
+        },
+        "3-mer motifs": {
+            "mean_delta_rmse": 0.00908127916682016,
+            "sd": 0.005004113626376947
+        },
+        "Stem-loop descriptors": {
+            "mean_delta_rmse": 0.0022750150663563644,
+            "sd": 0.0020138707662411526
+        }
+    },
+    "ism_hotspots": [
+        {
+            "normalized_position": 0.67,
+            "mean_abs_delta": 0.12971611303826366
+        },
+        {
+            "normalized_position": 0.69,
+            "mean_abs_delta": 0.14311334737728415
+        },
+        {
+            "normalized_position": 0.71,
+            "mean_abs_delta": 0.1464970007309166
+        },
+        {
+            "normalized_position": 0.73,
+            "mean_abs_delta": 0.17483403495148578
+        },
+        {
+            "normalized_position": 0.75,
+            "mean_abs_delta": 0.17906591054528515
+        },
+        {
+            "normalized_position": 0.77,
+            "mean_abs_delta": 0.18264732330040467
+        },
+        {
+            "normalized_position": 0.79,
+            "mean_abs_delta": 0.17182747323648306
+        },
+        {
+            "normalized_position": 0.81,
+            "mean_abs_delta": 0.161644539988203
+        },
+        {
+            "normalized_position": 0.83,
+            "mean_abs_delta": 0.13678994145954473
+        },
+        {
+            "normalized_position": 0.97,
+            "mean_abs_delta": 0.1327196213212861
+        }
+    ],
+    "important_note": "These rules are model-derived associations and sensitivities, not experimentally established causal constraints."
+}
