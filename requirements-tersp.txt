@@ -1,0 +1,6 @@
+# External check environment (Python 3.13)
+scikit-learn==1.6.1
+xgboost==3.4.1
+numpy
+pandas
+matplotlib

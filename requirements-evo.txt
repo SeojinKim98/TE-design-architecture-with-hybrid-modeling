@@ -1,0 +1,6 @@
+# Phase 3a environment (Python 3.9, separate from the Phase 1-2 environment)
+# Installed with micromamba; evo-model pins its own torch build.
+torch==2.1.2
+evo-model==0.4
+flash-attn==2.5.8
+triton==2.1.0
